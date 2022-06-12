@@ -7,8 +7,7 @@ const moveToFile = async (answer = 'cd Downloads') => {
   try {
     const filePath = answer.slice(2).trim();
     if (!filePath) {
-      console.log('Invalid input');
-      return;
+      throw new Error('Invalid input');
     }
     if (filePath === '..') {
       moveUpOneFolder();
@@ -20,10 +19,11 @@ const moveToFile = async (answer = 'cd Downloads') => {
     }
     newPath = newPath.replace('//', '/');
     if (!isExist(newPath) || !isDirectory(newPath)) {
-      console.log('Operation failed');
-      return;
+      throw new Error('Operation failed');
     }
     putVariableToEnv('CURRENTDIR', newPath);
-  } catch (e) {}
+  } catch (e) {
+    console.log(e.message);
+  }
 };
 export { moveToFile };
