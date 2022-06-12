@@ -13,7 +13,9 @@ export const addFile = (answer) => {
       throw new Error('Operation failed');
     }
     fs.open(newPath, 'wx', (err, func) => {
-      if (err) throw 'Operation failed';
+      if (err) {
+        throw new Error('Operation failed');
+      }
       console.log('File created');
     });
   } catch (e) {

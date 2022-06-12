@@ -14,7 +14,7 @@ export const readFile = async (answer) => {
       return;
     }
     if (!isExist(newPath) || isDirectory(newPath)) {
-      throw new Error('Invalid input');
+      throw new Error('Operation failed');
       return;
     }
 
@@ -24,7 +24,7 @@ export const readFile = async (answer) => {
       stdout.write(chunk + EOL);
     });
     readable.on('error', (err) => {
-      throw new Error('Invalid input');
+      throw new Error('Operation failed');
     });
     readable.on('close', () => {
       writeCurrentDir();
